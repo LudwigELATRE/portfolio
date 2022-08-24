@@ -291,10 +291,7 @@
           </p>
           <hr />
           <p class="lead text-secondary">Optez pour EL-Dev !</p>
-          <a
-            class="lien-cv"
-            href="/assets/cv/CV-Dévelopeur-web.pdf"
-            target="_blank"
+          <a class="lien-cv" href="./cv/cv.html" target="_blank"
             >Lien vers mon CV</a
           >
         </div>
@@ -397,7 +394,6 @@
                 <textarea
                   class="form-control"
                   id="message"
-                  type="text"
                   placeholder="Entrer votre message..."
                   style="height: 10rem"
                   data-sb-validations="required"
@@ -412,12 +408,17 @@
               </div>
               <div class="d-none" id="submitSuccessMessage">
                 <div class="text-center mb-3">
-                  <div class="fw-bolder">Votre message à bien été envoyer</div>
+                  <div class="fw-bolder">
+                    <p>
+                      Votre message à bien été envoyer<br />Je vous repondrais
+                      dans le plus bref delais
+                    </p>
+                  </div>
                 </div>
               </div>
               <div class="d-none" id="submitErrorMessage">
                 <div class="text-center text-danger mb-3">
-                  Error sending message!
+                  Erreur dans l'envoie du message!
                 </div>
               </div>
               <button
@@ -435,7 +436,7 @@
     <footer class="footer text-center">
       <div class="container">
         <div class="row">
-          <section class="col-lg-6 mb-5 mb-lg-0">
+          <section class="col-lg-3 mb-5 mb-lg-0">
             <h4 class="text-uppercase mb-4">Adresse</h4>
             <p class="lead mb-0">
               1 rue de Longpont
@@ -443,7 +444,16 @@
               91360 Villemoisson-sur-Orge
             </p>
           </section>
-          <section class="col-lg-6 mb-5 mb-lg-0">
+          <section class="col-lg-5 mb-5 mb-lg-0">
+            <h4 class="text-uppercase mb-4">Autre</h4>
+            <ul>
+              <li><a href="" class="lead mb-0">Mentions légales</a></li>
+              <li>
+                <a href="" class="lead mb-0">Politique de Confidentialité</a>
+              </li>
+            </ul>
+          </section>
+          <section class="col-lg-3 mb-5 mb-lg-0">
             <h4 class="text-uppercase mb-4">Réseaux</h4>
             <a
               class="btn btn-outline-light btn-social mx-1"
@@ -821,6 +831,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="js/scripts.js"></script>
+
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
   </body>
 </html>
