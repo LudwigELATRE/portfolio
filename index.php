@@ -14,10 +14,6 @@
       type="image/x-icon"
       href="assets/logo-fond-transparent.png"
     />
-    <script
-      src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
-      crossorigin="anonymous"
-    ></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
@@ -351,7 +347,6 @@
                   class="form-control"
                   id="nom"
                   type="text"
-                  value="daniel"
                   placeholder="Entrer votre nom..."
                   data-sb-validations="required"
                   name="nom"
@@ -367,7 +362,6 @@
                   id="prenom"
                   type="text"
                   name="prenom" 
-                  value="arthur"
                   placeholder="Entrer votre nom..."
                   data-sb-validations="required"
                 />
@@ -384,7 +378,6 @@
                   class="form-control"
                   id="email"
                   type="email"
-                  value="nomprenom@gmail.fr"
                   placeholder="name@example.com"
                   data-sb-validations="required,email"
                   name="email"
@@ -404,7 +397,7 @@
                   id="message"
                   placeholder="Entrer votre message..."
                   style="height: 10rem"
-                  data-sb-validations="required">ijdcnidjnizcjndinzidncozdciznciozn coizndcoiznoecno zecnoznecozei ncoinzeoceioce</textarea>
+                  data-sb-validations="required"></textarea>
                 <label for="message">Message</label>
                 <div
                   class="invalid-feedback"
@@ -835,11 +828,14 @@
         </div>
       </div>
     </div>
+<!--     
+    <script src="js/scripts.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="js/scripts.js"></script>
+    <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 
-    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
+
   </body>
 </html>
