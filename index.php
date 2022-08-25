@@ -18,25 +18,25 @@
       src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"
       crossorigin="anonymous"
     ></script>
-    <!-- <link
+    <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-    /> -->
+    />
     <link
       href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
       rel="stylesheet"
-      type="text/css"
+   
     />
     <link
       href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
       rel="stylesheet"
-      type="text/css"
+
     />
     <link href="css/styles.css" rel="stylesheet" />
   </head>
   <body id="page-top">
     <nav
-      class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top d-none"
+      class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top"
       id="mainNav"
     >
       <div class="container">
@@ -299,7 +299,7 @@
           <div class="col-sm-12 col-lg-4">
             <p class="lead-dev text-secondary">Front-end</p>
             <p class="lead text-secondary">
-              Languages:<br />
+              Langages:<br />
               <i class="fa-brands fa-html5"></i>,
               <i class="fa-brands fa-css3-alt"></i>,
               <i class="fa-brands fa-sass"></i>,
@@ -315,7 +315,7 @@
           <div class="col-sm-12 col-lg-4">
             <p class="lead-dev text-secondary">Back-end</p>
             <p class="lead text-secondary">
-              Languages:<br />
+              Langages:<br />
               <i class="fa-brands fa-php"></i>
             </p>
             <p class="lead text-secondary">
@@ -345,11 +345,13 @@
               method="post"
               action ="php/contact.php"
             >
+            <?= ($_GET['send']) ?? ''; ?>
               <div class="form-floating mb-3">
                 <input
                   class="form-control"
                   id="nom"
                   type="text"
+                  value="daniel"
                   placeholder="Entrer votre nom..."
                   data-sb-validations="required"
                   name="nom"
@@ -365,6 +367,7 @@
                   id="prenom"
                   type="text"
                   name="prenom" 
+                  value="arthur"
                   placeholder="Entrer votre nom..."
                   data-sb-validations="required"
                 />
@@ -381,6 +384,7 @@
                   class="form-control"
                   id="email"
                   type="email"
+                  value="nomprenom@gmail.fr"
                   placeholder="name@example.com"
                   data-sb-validations="required,email"
                   name="email"
@@ -400,8 +404,7 @@
                   id="message"
                   placeholder="Entrer votre message..."
                   style="height: 10rem"
-                  data-sb-validations="required"
-                ></textarea>
+                  data-sb-validations="required">ijdcnidjnizcjndinzidncozdciznciozn coizndcoiznoecno zecnoznecozei ncoinzeoceioce</textarea>
                 <label for="message">Message</label>
                 <div
                   class="invalid-feedback"
@@ -450,9 +453,9 @@
             </p>
           </section>
           <section class="col-lg-5 mb-5 mb-lg-0">
-            <h4 class="text-uppercase mb-4">Autre</h4>
+            <h4 class="text-uppercase mb-4">EL-DEV</h4>
             <ul>
-              <li><a href="" class="lead mb-0">Mentions légales</a></li>
+              <li><a href="./pages/mention.html" class="lead mb-0">Mentions légales</a></li>
               <li>
                 <a href="" class="lead mb-0">Politique de Confidentialité</a>
               </li>
@@ -833,10 +836,10 @@
       </div>
     </div>
 
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="js/scripts.js"></script>
 
-    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script> -->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
   </body>
 </html>

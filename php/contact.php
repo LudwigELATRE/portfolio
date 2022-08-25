@@ -22,6 +22,7 @@ echo '</pre>';
     //----------------------------------------------------------------------------------
     if(isset($_POST['envoyer'])){
         /*Si la variable $_Post['truc'] exist, alors $truc=$_POST['truc'] sinon elle vaut NULL */
+        extract($_POST);
         $error = "";
        (!empty($_POST['nom']) ? $nom = htmlspecialchars($_POST['nom']) : $error .= 'erreur nom <br>');
        (!empty($_POST['prenom']) ? $prenom = htmlspecialchars($_POST['prenom']) : $error .= 'erreur prenom <br>');
@@ -29,23 +30,30 @@ echo '</pre>';
        (!empty($_POST['message']) ? $message = htmlspecialchars($_POST['message']) : $error .= 'erreur message <br>');
 
        
-            $insert=$db->prepare("INSERT INTO contact (nom, prenom, mail, message) VALUES(:nom, :prenom, :mail, :message") or die(print_r($db->errorinfo()));
-       
+            $PDOStatement=$db->prepare('INSERT INTO `contact`(`id`,`nom`, `prenom`, `message`, `mail`) VALUES (:id,:nom,:prenom,:message,:mail)');
+
+
+
         /*l'insertion se fait avec les parametres <binParam></binParam>*/
 
         //On renvoie l'utilisateur vers la page de remerciement
-        $insert->bindParam(':nom', $nom);
-        $insert->bindParam(':prenom', $prenom);
-        $insert->bindParam(':mail', $email);
-        $insert->bindParam(':message', $message);
-        $insert->execute();
-        //PDOStatement->execute();
+        // $PDOStatement->bindParam(':nom', $nom);
+        // $PDOStatement->bindParam(':prenom', $prenom);
+        // $PDOStatement->bindParam(':mail', $email);
+        // $PDOStatement->bindParam(':message', $message);
+        $PDOStatement->execute([
+            'id'    => null,
+            'nom' => $nom,
+            'prenom' => $prenom,
+            'mail' => $email,
+            'message' => $message
+        ]); 
 
-        header("Location:index.html?send=success");
+        header("Location:../index.php?send=success");
         exit();
 
     }else{
-        header("Location:index.html?send=error");
+        header("Location:../index.php?send=error");
         exit(); 
     }
 
