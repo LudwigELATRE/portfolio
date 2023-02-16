@@ -1,77 +1,63 @@
 <?php
+    $nom = htmlspecialchars($_POST['nom']);    //variable nom
+    $prenom = htmlspecialchars($_POST['prenom']);    //variable prenom
+    $email = htmlspecialchars($_POST['email']);    //variable mail
+    $message = htmlspecialchars($_POST['message']);  
+    
+    use PHPMailer\PHPMailer\PHPMailer;
+    use PHPMailer\PHPMailer\Exception;
 
+    require '../PHPMailer/src/Exception.php';
+    require '../PHPMailer/src/PHPMailer.php';
+    require '../PHPMailer/src/SMTP.php';//variable message
 
-    if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['message'])){
-        if(isset($message)){
-            $info = "Ce message vous a été envoyé via la page contact du site el-dev.fr
-            Nom : " .$nom "
-            Prenom : " .$prenom "
-            Email : " .$email "
-            Message : " .$message;
-            $retour = mail(ludwig.elatre@outlook.com, $nom, $prenom, $message, "FROM:contact@el-dev.fr\r\nReplay-to" .$email );
-            if($retour){
-                echo "<p>L'email a bien été envoyé.</p>"
-            }else{
-                echo "<p>L'email n'a pas été envoyé.</p>"
-            }
-        }
+    $mail = new PHPMailer(true);
+
+    try {
+        //Server settings
+        $mail->SMTPDebug = 2;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'mail.el-dev.fr';                       //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        $mail->Username   = 'contact@el-dev.fr';                     //SMTP username
+        $mail->Password   = 'Q0cPwcBdXN0d';
+        // PHPMailer::ENCRYPTION_SMTPS                               //SMTP password
+        $mail->SMTPSecure = "ssl";            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+        //Recipients
+        $mail->setFrom('contact@el-dev.fr', 'el-dev');
+        $mail->addAddress($_POST['mail']);     //Add a recipient
+        //$mail->addAddress('ellen@example.com');               //Name is optional
+        //$mail->addReplyTo('info@example.com', 'Information');
+        //$mail->addCC('cc@example.com');
+        //$mail->addBCC('bcc@example.com');
+
+        //Attachments
+        //$mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+        //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = 'Envoie de la demande';
+        $mail->Body    = 'Votre messgae à bien été envoyé. Je vous rendrais dans les plus <b>bref delais!</b>';
+        $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+        $mail->send();
+        echo 'Message has been sent';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
-    
-    /*PHPMailer */
-    // use PHPMailer\PHPMailer\PHPMailer;
-    // use PHPMailer\PHPMailer\Exception;
-    
-    // require '/home/cpanelusername/PHPMailerTest/PHPMailer/src/Exception.php';
-    // require '/home/cpanelusername/PHPMailerTest/PHPMailer/src/PHPMailer.php';
-    // require '/home/cpanelusername/PHPMailerTest/PHPMailer/src/SMTP.php';
-    
-    // // Instantiation and passing [ICODE]true[/ICODE] enables exceptions
-    // $mail = new PHPMailer(true);
-    
-    // try {
-    //  //Server settings
-    //  $mail->SMTPDebug = 2; // Enable verbose debug output
-    //  $mail->isSMTP(); // Set mailer to use SMTP
-    //  $mail->Host = 'smtp1.example.com;smtp2.example.com'; // Specify main and backup SMTP servers
-    //  $mail->SMTPAuth = true; // Enable SMTP authentication
-    //  $mail->Username = 'user@example.com'; // SMTP username
-    //  $mail->Password = 'jrnU-TeVV-dSg@'; // SMTP password
-    //  $mail->SMTPSecure = 'tls'; // Enable TLS encryption, [ICODE]ssl[/ICODE] also accepted
-    //  $mail->Port = 587; // TCP port to connect to
-    
-    // //Recipients
-    //  $mail->setFrom('from@example.com', 'Mailer');
-    //  $mail->addAddress('recipient1@example.net', 'Joe User'); // Add a recipient
-    //  $mail->addAddress('recipient2@example.com'); // Name is optional
-    //  $mail->addReplyTo('info@example.com', 'Information');
-    //  $mail->addCC('cc@example.com');
-    //  $mail->addBCC('bcc@example.com');
-    
-    // // Attachments
-    //  $mail->addAttachment('/home/cpanelusername/attachment.txt'); // Add attachments
-    //  $mail->addAttachment('/home/cpanelusername/image.jpg', 'new.jpg'); // Optional name
-    
-    // // Content
-    //  $mail->isHTML(true); // Set email format to HTML
-    //  $mail->Subject = 'Here is the subject';
-    //  $mail->Body = 'This is the HTML message body <b>in bold!</b>';
-    //  $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-    
-    // $mail->send();
-    //  echo 'Message envoyé';
-    
-    // } catch (Exception $e) {
-    //  echo "Le message ne peut être envoyé. Mailer Error: {$mail->ErrorInfo}";
-    // }
 
-/*Envoie des element du formulaire dans la base de donnée Mysql */
+if($mail){
+        /*Envoie des element du formulaire dans la base de donnée Mysql */
     //Affichage des erreurs
     error_reporting(E_ALL);
     ini_set('display_error', TRUE);
     ini_set('display_startup_errors',  TRUE);
     echo '<pre>';
-var_dump($_POST);
-echo '</pre>';
+    var_dump($_POST);
+    echo '</pre>';
     /* on se connecte à la base de données*/
     $host = "localhost:8889"; $dbname = "portfolio"; $user = "root"; $mdp = "root";
     try{
@@ -90,13 +76,13 @@ echo '</pre>';
         /*Si la variable $_Post['truc'] exist, alors $truc=$_POST['truc'] sinon elle vaut NULL */
         extract($_POST);
         $error = "";
-       (!empty($_POST['nom']) ? $nom = htmlspecialchars($_POST['nom']) : $error .= 'erreur nom <br>');
-       (!empty($_POST['prenom']) ? $prenom = htmlspecialchars($_POST['prenom']) : $error .= 'erreur prenom <br>');
-       (!empty($_POST['email']) ? $email = htmlspecialchars($_POST['email']) : $error .= 'erreur email <br>');
-       (!empty($_POST['message']) ? $message = htmlspecialchars($_POST['message']) : $error .= 'erreur message <br>');
+       (!empty($_POST['nom']) ? $nom : $error .= 'erreur nom <br>');
+       (!empty($_POST['prenom']) ? $prenom : $error .= 'erreur prenom <br>');
+       (!empty($_POST['email']) ? $email : $error .= 'erreur email <br>');
+       (!empty($_POST['message']) ? $message : $error .= 'erreur message <br>');
 
        
-            $PDOStatement=$db->prepare('INSERT INTO `contact`(`id`,`nom`, `prenom`, `message`, `mail`) VALUES (:id,:nom,:prenom,:message,:mail)');
+        $PDOStatement=$db->prepare('INSERT INTO `contact`(`id`,`nom`, `prenom`, `message`, `mail`) VALUES (:id,:nom,:prenom,:message,:mail)');
 
 
 
@@ -118,22 +104,11 @@ echo '</pre>';
         header("Location:../index.php?send=success");
         exit();
 
-    }else{
+        }else{
         header("Location:../index.php?send=error");
         exit(); 
+        }
     }
-
-
-    // if(!empty($_POST['nom']) && !empty($_POST['prenom']) && !empty($_POST['email']) && !empty($_POST['message'])){
-    //     if(isset($message)){
-    //         $info = "Ce message vous a été envoyé via la page contact du site el-dev.fr
-    //         Nom : " .$nom "
-    //         Prenom : " .$prenom "
-    //         Email : " .$email "
-    //         Message : " .$message;
-    //         $retour = mail(ludwig.elatre@outlook.com, $nom, $prenom, $message, "FROM:contact@exemple.fr\r\nReplay-to" .$email );
-    //         if($retour){
-    //             echo "<p>L'email a bien été envoyé.</p>"
-    //         }
-    //     }
-    // }
+        //else{
+        // echo "Erreur il y a un probleme"
+        // }

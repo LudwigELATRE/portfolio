@@ -1,0 +1,26 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^golden\-fingers\.fr\,golden\-fingersfr_sjxq5813\.odns\.fr$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.golden\-fingers\.fr\,golden\-fingersfr_sjxq5813\.odns\.fr$
+RewriteRule ^/?$ "https\:\/\/golden\-fingers\.el\-dev\.fr\/" [R=301,L]
+
+# Interdire l'accès à tout fichier .htaccess
+<Files .htaccess>
+  order allow,deny
+  deny from all
+</Files>
+
+# Interdire l'accès à tout fichier de configuration
+<Files config.php>
+  order allow,deny
+  deny from all
+</Files>
+
+# Protéger contre les attaques de type Cross-Site Scripting (XSS)
+Header set X-XSS-Protection "1; mode=block"
+
+# Protéger contre les attaques de type Cross-Site Request Forgery (CSRF)
+Header set X-Content-Type-Options "nosniff"
+
+# Protéger contre les attaques de type clickjacking
+Header set X-Frame-Options "SAMEORIGIN"

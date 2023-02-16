@@ -1,0 +1,10 @@
+[29-Jan-2023 22:32:28 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'sjxq5813_portfolio.contacts' doesn't exist in /home/sjxq5813/public_html/php/contactcopy.php:35
+Stack trace:
+#0 /home/sjxq5813/public_html/php/contactcopy.php(35): PDOStatement->execute()
+#1 {main}
+  thrown in /home/sjxq5813/public_html/php/contactcopy.php on line 35
+[29-Jan-2023 22:35:21 UTC] PHP Fatal error:  Uncaught PDOException: SQLSTATE[23000]: Integrity constraint violation: 1062 Duplicate entry 'ludwig.elatre@outlook.com' for key 'email' in /home/sjxq5813/public_html/php/contactcopy.php:35
+Stack trace:
+#0 /home/sjxq5813/public_html/php/contactcopy.php(35): PDOStatement->execute()
+#1 {main}
+  thrown in /home/sjxq5813/public_html/php/contactcopy.php on line 35
